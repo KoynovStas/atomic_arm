@@ -274,6 +274,130 @@ int test_atomic_sub_6(struct test_info_t  *test_info)
 
 
 
+
+
+// -------------------  AND  --------------------
+
+int test_atomic_and_1(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    unsigned int i = 0;
+    unsigned int ret;
+
+
+    ret = atomic_fetch_and(&i, 1);
+
+    if( (i != 0) ||  (ret != 0) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_and_2(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    unsigned int i = 2;
+    unsigned int ret;
+
+
+    ret = atomic_fetch_and(&i, 2);
+
+    if( (i != 2) ||  (ret != 2) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_and_3(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    unsigned int i = 0xFFFF;
+    unsigned int ret;
+
+
+    ret = atomic_fetch_and(&i, 0xFF);
+
+    if( (i != 0xFF) ||  (ret != 0xFFFF) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_and_4(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    unsigned int i = -1;
+    unsigned int ret;
+
+
+    ret = atomic_fetch_and(&i, 0);
+
+    if( (i != 0) ||  (ret != -1) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_and_5(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    unsigned int i = 0xFFFF;
+    unsigned int ret;
+
+
+    ret = atomic_fetch_and(&i, 0xFF00);
+
+    if( (i != 0xFF00) ||  (ret != 0xFFFF) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_and_6(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    unsigned int i = 0xFFFFAA55;
+    unsigned int ret;
+
+
+    ret = atomic_fetch_and(&i, 0xFFFF5A5A);
+
+    if( (i != 0xFFFF0A50) ||  (ret != 0xFFFFAA55) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
 ptest_func tests[] =
 {
 
@@ -293,6 +417,15 @@ ptest_func tests[] =
     test_atomic_sub_4,
     test_atomic_sub_5,
     test_atomic_sub_6,
+
+
+    //and
+    test_atomic_and_1,
+    test_atomic_and_2,
+    test_atomic_and_3,
+    test_atomic_and_4,
+    test_atomic_and_5,
+    test_atomic_and_6,
 };
 
 
