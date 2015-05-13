@@ -536,6 +536,130 @@ int test_atomic_or_6(struct test_info_t  *test_info)
 
 
 
+
+
+// -------------------  XOR  --------------------
+
+int test_atomic_xor_1(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    unsigned int i = 0;
+    unsigned int ret;
+
+
+    ret = atomic_fetch_xor(&i, 1);
+
+    if( (i != 1) ||  (ret != 0) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_xor_2(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    unsigned int i = 1;
+    unsigned int ret;
+
+
+    ret = atomic_fetch_xor(&i, 0);
+
+    if( (i != 1) ||  (ret != 1) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_xor_3(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    unsigned int i = 0xAAAAAAAA;
+    unsigned int ret;
+
+
+    ret = atomic_fetch_xor(&i, 0);
+
+    if( (i != 0xAAAAAAAA) ||  (ret != 0xAAAAAAAA) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_xor_4(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    unsigned int i = 0xAAAAAAAA;
+    unsigned int ret;
+
+
+    ret = atomic_fetch_xor(&i, 0x55555555);
+
+    if( (i != 0xFFFFFFFF) ||  (ret != 0xAAAAAAAA) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_xor_5(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    unsigned int i = 0xFFFFFFFF;
+    unsigned int ret;
+
+
+    ret = atomic_fetch_xor(&i, 0xFFFFFFFF);
+
+    if( (i != 0) ||  (ret != 0xFFFFFFFF) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_xor_6(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    unsigned int i = 0xFFFFFFFF;
+    unsigned int ret;
+
+
+    ret = atomic_fetch_xor(&i, 0x55555555);
+
+    if( (i != 0xAAAAAAAA) ||  (ret != 0xFFFFFFFF) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
 ptest_func tests[] =
 {
 
@@ -573,6 +697,16 @@ ptest_func tests[] =
     test_atomic_or_4,
     test_atomic_or_5,
     test_atomic_or_6,
+
+
+    //xor
+    test_atomic_xor_1,
+    test_atomic_xor_2,
+    test_atomic_xor_3,
+    test_atomic_xor_4,
+    test_atomic_xor_5,
+    test_atomic_xor_6,
+
 };
 
 
