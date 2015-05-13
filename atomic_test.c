@@ -153,6 +153,127 @@ int test_atomic_add_6(struct test_info_t  *test_info)
 
 
 
+
+
+// -------------------  SUB  --------------------
+
+int test_atomic_sub_1(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    int i = 0;
+    int ret;
+
+    ret = atomic_fetch_sub(&i, 1);
+
+    if( (i != -1) ||  (ret != 0) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_sub_2(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    int i = 0;
+    int ret;
+
+    ret = atomic_fetch_sub(&i, 2);
+
+    if( (i != -2) ||  (ret != 0) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_sub_3(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    int i = 0;
+    int ret;
+
+
+    ret = atomic_fetch_sub(&i, -2);
+
+    if( (i != 2) ||  (ret != 0) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_sub_4(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    int i = -2;
+    int ret;
+
+    ret = atomic_fetch_sub(&i, 2);
+
+    if( (i != -4) ||  (ret != -2) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_sub_5(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    int i = 0;
+    int ret;
+
+
+    ret = atomic_fetch_sub(&i, 255);
+
+    if( (i != -255) ||  (ret != 0) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_sub_6(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    int i = -100;
+    int ret;
+
+
+    ret = atomic_fetch_sub(&i, -100);
+
+    if( (i != 0) ||  (ret != -100) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
 ptest_func tests[] =
 {
 
@@ -164,6 +285,14 @@ ptest_func tests[] =
     test_atomic_add_5,
     test_atomic_add_6,
 
+
+    //sub
+    test_atomic_sub_1,
+    test_atomic_sub_2,
+    test_atomic_sub_3,
+    test_atomic_sub_4,
+    test_atomic_sub_5,
+    test_atomic_sub_6,
 };
 
 
