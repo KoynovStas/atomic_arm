@@ -30,3 +30,8 @@ You need to include **atomic_arm.h** file in your **.c** file.
 ```
 
 And add file **atomic_arm.S** to list of source files to compile. (see an example)
+
+<br/>
+## License
+
+[BSD](./LICENSE).
