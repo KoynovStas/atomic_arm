@@ -660,6 +660,70 @@ int test_atomic_xor_6(struct test_info_t  *test_info)
 
 
 
+
+
+// -------------------  exchange  --------------------
+
+int test_atomic_exchange_1(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    int i = 0;
+    int ret;
+
+
+    ret = atomic_exchange(&i, 1);
+
+    if( (i != 1) ||  (ret != 0) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_exchange_2(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    int i = 0;
+    int ret;
+
+
+    ret = atomic_exchange(&i, -1);
+
+    if( (i != -1) ||  (ret != 0) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
+int test_atomic_exchange_3(struct test_info_t  *test_info)
+{
+
+    TEST_INIT;
+
+    int i = 0xAAAAAAAA;
+    int ret;
+
+
+    ret = atomic_exchange(&i, 0x55555555);
+
+    if( (i != 0x55555555) ||  (ret != 0xAAAAAAAA) )
+        return TEST_BROKEN;
+
+
+    return TEST_PASSED;
+}
+
+
+
 ptest_func tests[] =
 {
 
@@ -707,6 +771,11 @@ ptest_func tests[] =
     test_atomic_xor_5,
     test_atomic_xor_6,
 
+
+    //exchange
+    test_atomic_exchange_1,
+    test_atomic_exchange_2,
+    test_atomic_exchange_3,
 };
 
 
