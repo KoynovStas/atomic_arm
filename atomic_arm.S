@@ -9,14 +9,12 @@
     .global atomic_fetch_##OPP                               ;\
     .type   atomic_fetch_##OPP, %function                    ;\
 atomic_fetch_##OPP:                                          ;\
-    dmb     sy                                               ;\
 .try_##OPP:                                                  ;\
     ldrex   r2,  [r0]                                        ;\
     ##CMD   r12, r2,  r1                                     ;\
     strex   r3,  r12, [r0]                                   ;\
     teq     r3,  #0                                          ;\
     bne     .try_##OPP                                       ;\
-    dmb     sy                                               ;\
     mov     r0,  r2                                          ;\
     bx      lr                                               ;\
     .size   atomic_fetch_##OPP, .-atomic_fetch_##OPP         ;\
