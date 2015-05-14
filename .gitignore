@@ -26,6 +26,7 @@
 # Binary files
 atomic_test
 atomic_vs_mutex_test
+atomic_vs_spin_test
 
 
 
