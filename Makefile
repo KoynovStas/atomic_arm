@@ -7,7 +7,8 @@ GCC         =  arm-uid01_rev2_toolchain_buildroot-linux-uclibcgnueabi-gcc
 
 # list of tests for build
 TESTS  = atomic_test \
-         atomic_vs_mutex_test
+         atomic_vs_mutex_test \
+         atomic_vs_spin_test
 
 
 
