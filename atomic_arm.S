@@ -1,4 +1,16 @@
 /*
+ * atomic_arm.S
+ *
+ *
+ * version 1.0
+ *
+ *
+ * Copyright (c) 2015, Koynov Stas - skojnov@yandex.ru
+ *
+ *
+ * more details see https://github.com/KoynovStas/atomic_arm
+ *
+ *
  *  Warning
  *
  *  This implementation does not contain memory barriers (DMB - command for ARM).
