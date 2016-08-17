@@ -1,6 +1,8 @@
-CFLAGS     += -O2  -s  -Wall  -lpthread  -lrt
-GCC         =  arm-uid01_rev2_toolchain_buildroot-linux-uclibcgnueabi-gcc
+CFLAGS     += -O2  -s  -Wall  -lpthread -lrt
+#CFLAGS     += -D_GNU_SOURCE -std=c11
 
+GCC         =  arm-uid01_rev2_toolchain_buildroot-linux-uclibcgnueabi-gcc
+#GCC         = arm-gcc_4.9.2_cortex_a15-linux-uclibcgnueabi-gcc
 
 
 
@@ -20,9 +22,9 @@ all: clean  $(TESTS)
 
 .PHONY: clean
 clean:
-	-@rm  *.o
-	-@rm  *.*~
-	-@rm  $(TESTS)
+	-@rm -f *.o
+	-@rm -f *.*~
+	-@rm -f $(TESTS)
 
 
 
