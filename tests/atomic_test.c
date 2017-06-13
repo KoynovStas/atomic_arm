@@ -19,83 +19,25 @@ TEST(test_atomic_add_1)
 
 
     ret = atomic_fetch_add(&i, 1);
-
     TEST_ASSERT( (i == 1) && (ret == 0) );
 
-
-    TEST_PASS(NULL);
-}
-
-
-
-TEST(test_atomic_add_2)
-{
-    int i = 0;
-    int ret;
-
     ret = atomic_fetch_add(&i, 2);
-
-    TEST_ASSERT( (i == 2) && (ret == 0) );
-
-
-    TEST_PASS(NULL);
-}
-
-
-
-TEST(test_atomic_add_3)
-{
-    int i = 0;
-    int ret;
+    TEST_ASSERT( (i == 3) && (ret == 1) );
 
     ret = atomic_fetch_add(&i, -2);
-
-    TEST_ASSERT( (i == -2) && (ret == 0) );
-
-
-    TEST_PASS(NULL);
-}
-
-
-
-TEST(test_atomic_add_4)
-{
-    int i = -2;
-    int ret;
+    TEST_ASSERT( (i == 1) && (ret == 3) );
 
     ret = atomic_fetch_add(&i, 2);
+    TEST_ASSERT( (i == 3) && (ret == 1) );
 
-    TEST_ASSERT( (i == 0) && (ret == -2) );
-
-
-    TEST_PASS(NULL);
-}
-
-
-
-TEST(test_atomic_add_5)
-{
-    int i = 0;
-    int ret;
+    ret = atomic_fetch_add(&i, -3);
+    TEST_ASSERT( (i == 0) && (ret == 3) );
 
     ret = atomic_fetch_add(&i, 0xFFFFFF);
-
     TEST_ASSERT( (i == 0xFFFFFF) && (ret == 0) );
 
-
-    TEST_PASS(NULL);
-}
-
-
-
-TEST(test_atomic_add_6)
-{
-    int i = 0;
-    int ret;
-
     ret = atomic_fetch_add(&i, 0);
-
-    TEST_ASSERT( (i == 0) && (ret == 0) );
+    TEST_ASSERT( (i == 0xFFFFFF) && (ret == 0xFFFFFF) );
 
 
     TEST_PASS(NULL);
@@ -113,89 +55,27 @@ TEST(test_atomic_sub_1)
     int ret;
 
     ret = atomic_fetch_sub(&i, 1);
-
     TEST_ASSERT( (i == -1) && (ret == 0) );
 
-
-    TEST_PASS(NULL);
-}
-
-
-
-TEST(test_atomic_sub_2)
-{
-    int i = 0;
-    int ret;
-
     ret = atomic_fetch_sub(&i, 2);
-
-    TEST_ASSERT( (i == -2) && (ret == 0) );
-
-
-    TEST_PASS(NULL);
-}
-
-
-
-TEST(test_atomic_sub_3)
-{
-    int i = 0;
-    int ret;
+    TEST_ASSERT( (i == -3) && (ret == -1) );
 
     ret = atomic_fetch_sub(&i, -2);
+    TEST_ASSERT( (i == -1) && (ret == -3) );
 
-    TEST_ASSERT( (i == 2) && (ret == 0) );
+    ret = atomic_fetch_sub(&i, 200);
+    TEST_ASSERT( (i == -201) && (ret == -1) );
 
+    ret = atomic_fetch_sub(&i, 1000);
+    TEST_ASSERT( (i == -1201) && (ret == -201) );
 
-    TEST_PASS(NULL);
-}
-
-
-
-TEST(test_atomic_sub_4)
-{
-    int i = -2;
-    int ret;
-
-    ret = atomic_fetch_sub(&i, 2);
-
-    TEST_ASSERT( (i == -4) && (ret == -2) );
+    ret = atomic_fetch_sub(&i, -1201);
+    TEST_ASSERT( (i == 0) && (ret == -1201) );
 
 
     TEST_PASS(NULL);
 }
 
-
-
-TEST(test_atomic_sub_5)
-{
-    int i = 0;
-    int ret;
-
-
-    ret = atomic_fetch_sub(&i, 255);
-
-    TEST_ASSERT( (i == -255) && (ret == 0) );
-
-
-    TEST_PASS(NULL);
-}
-
-
-
-TEST(test_atomic_sub_6)
-{
-    int i = -100;
-    int ret;
-
-
-    ret = atomic_fetch_sub(&i, -100);
-
-    TEST_ASSERT( (i == 0) && (ret == -100) );
-
-
-    TEST_PASS(NULL);
-}
 
 
 // -------------------  AND  --------------------
@@ -544,20 +424,10 @@ ptest_func tests[] =
 
     //add
     test_atomic_add_1,
-    test_atomic_add_2,
-    test_atomic_add_3,
-    test_atomic_add_4,
-    test_atomic_add_5,
-    test_atomic_add_6,
 
 
     //sub
     test_atomic_sub_1,
-    test_atomic_sub_2,
-    test_atomic_sub_3,
-    test_atomic_sub_4,
-    test_atomic_sub_5,
-    test_atomic_sub_6,
 
 
     //and
