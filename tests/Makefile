@@ -40,7 +40,7 @@ atomic_arm.o:
 $(TESTS): 
 	$(GCC)  $@.c -o $@    $(CFLAGS)
 	@echo "  ---- Compiled $@ ----"
-	@echo ""
+	-@  ./$@
 
 
 

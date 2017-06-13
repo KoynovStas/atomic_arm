@@ -173,14 +173,12 @@ int main(void)
         perror_exit("Cant init spin_lock");
 
 
-
     printf("run spin test threads, wait...\n\n");
     run_test(test_spin_thread1, test_spin_thread2);
 
 
     printf("run atomic test threads, wait...\n\n");
     run_test(test_atomic_thread1, test_atomic_thread2);
-
 
 
     return 0; //good job
