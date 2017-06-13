@@ -8,8 +8,7 @@ The project implemented atomic operations such as **atomic_fetch_xxx** (xxx is a
 **You can use this set of functions in old projects that uses previous version of GCC. If transfer of the project to new standard C11 is difficult.**
 
 
-***
-<br/>
+
 ## Warning
 This implementation does not contain memory barriers (DMB - command for ARM). 
 Therefore, there can't be used to implement the synchronization primitives.
@@ -18,7 +17,7 @@ If you using GCC 4.9.0 or higher, use standard atomic operations according of ST
 
 ##### This implementation supports the following architectures:  **ARMv6, ARMv6J, ARMv6K, ARMv6Z, ARMv6ZK, ARMv7, ARMv7A, ARMv7R**
 
-<br/>
+
 ## Usage
 
 You need to include **atomic_arm.h** file in your **.c** file.
@@ -31,7 +30,7 @@ You need to include **atomic_arm.h** file in your **.c** file.
 
 And add file **atomic_arm.S** to list of source files to compile. (see an example)
 
-<br/>
+
 ## License
 
-[BSD](./LICENSE).
+[BSD-3-Clause](./LICENSE).
