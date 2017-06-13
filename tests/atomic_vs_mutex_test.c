@@ -7,13 +7,13 @@
 
 
 
-#include "atomic_arm.h"
+//#include "atomic_arm.h"
 
 
 
 
 
-#define  MAX_COUNT_LOOP_ITERATIONS  (100000000)
+#define  MAX_COUNT_LOOP_ITERATIONS  (10)
 
 
 
@@ -44,6 +44,8 @@ void* test_mutex_thread1(void *thread_arg)
     for(i = 0; i < MAX_COUNT_LOOP_ITERATIONS; i++)
     {
         pthread_mutex_lock(&test_mutex);
+       //int er = pthread_mutex_lock(&test_mutex);
+        //printf("err = %d\n", er);
         test_reg++;
         pthread_mutex_unlock(&test_mutex);
     }
@@ -72,35 +74,6 @@ void* test_mutex_thread2(void *thread_arg)
 
 
 
-void* test_atomic_thread1(void *thread_arg)
-{
-
-    unsigned int i;
-
-    for(i = 0; i < MAX_COUNT_LOOP_ITERATIONS; i++)
-    {
-        atomic_fetch_add(&test_reg, 1);
-    }
-
-
-    return NULL;
-}
-
-
-
-void* test_atomic_thread2(void *thread_arg)
-{
-
-    unsigned int i;
-
-    for(i = 0; i < MAX_COUNT_LOOP_ITERATIONS; i++)
-    {
-        atomic_fetch_sub(&test_reg, 1);
-    }
-
-
-    return NULL;
-}
 
 
 
@@ -173,9 +146,6 @@ int main(void)
     printf("run mutex test threads, wait...\n\n");
     run_test(test_mutex_thread1, test_mutex_thread2);
 
-
-    printf("run atomic test threads, wait...\n\n");
-    run_test(test_atomic_thread1, test_atomic_thread2);
 
 
     return 0; //good job

@@ -1,8 +1,10 @@
-CFLAGS     += -O2  -s  -Wall  -lpthread -lrt
-#CFLAGS     += -D_GNU_SOURCE -std=c11
+CFLAGS  += -D_GNU_SOURCE -std=c11
+CFLAGS  += -O2  -s  -Wall
+CFLAGS  += -I..
+CFLAGS  += -lpthread -lrt
 
-GCC         =  arm-uid01_rev2_toolchain_buildroot-linux-uclibcgnueabi-gcc
-#GCC         = arm-gcc_4.9.2_cortex_a15-linux-uclibcgnueabi-gcc
+GCC      =  gcc #arm-uid01_rev2_toolchain_buildroot-linux-uclibcgnueabi-gcc
+#GCC      = arm-gcc_4.9.2_cortex_a15-linux-uclibcgnueabi-gcc
 
 
 
@@ -30,13 +32,13 @@ clean:
 
 # Our implementation of atomic functions
 atomic_arm.o:
-	$(GCC)  -c atomic_arm.S $(CFLAGS)
+	$(GCC)  -c ../atomic_arm.S $(CFLAGS)
 
 
 
 .PHONY: $(TESTS)
-$(TESTS): atomic_arm.o
-	$(GCC)  $@.c -o $@  atomic_arm.o  $(CFLAGS)
+$(TESTS): 
+	$(GCC)  $@.c -o $@    $(CFLAGS)
 	@echo "  ---- Compiled $@ ----"
 	@echo ""
 
